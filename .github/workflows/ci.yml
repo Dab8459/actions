@@ -2,7 +2,7 @@ name: ci
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 5 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,13 +14,13 @@ jobs:
 
       - name: Random Decide for Submitting
         id: random_decision
-        run: echo "should_commit=$(( $RANDOM % 2 ))" >> $GITHUB_ENV
+        run: echo "should_commit=$(( RANDOM % 2 ))" >> $GITHUB_ENV
 
       - name: Conditional commit
         if: env.should_commit == '1'
         run: |
           git config --local user.email "skindowshao@qq.com"
-           git config --local user.name "Dab8459"
+          git config --local user.name "Dab8459"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
           git commit --allow-empty -m "Make Program Every Day!"
