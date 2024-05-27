@@ -2,7 +2,8 @@ name: ci
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "0 2 * * *"
+    - cron: "0 12 * * *"
   workflow_dispatch:
 
 jobs:
@@ -21,7 +22,7 @@ jobs:
         run: |
           git config --local user.email "skindowshao@qq.com"
           git config --local user.name "Dab8459"
-          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
           git commit --allow-empty -m "Make Program Every Day!"
           git push
